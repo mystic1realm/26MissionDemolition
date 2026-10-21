@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class Slingshot : MonoBehaviour
 {
-    [Header("Set in Inspector")]
+     [Header("Inscribed")]
 
     public GameObject prefabProjectile;
 
-    public float velocityMult = 8f;
+    public float velocityMult = 10f;
 
-    [Header("Set Dynamically")]
+    public float bandWidth = 0.15f;
+
+    public Material bandMat;
+
+    public Color bandColor = new Color(0.35f, 0.2f, 0.1f);
+
+    [Header("Dynamic")]
 
     public GameObject launchPoint;
 
@@ -22,6 +28,13 @@ public class Slingshot : MonoBehaviour
 
     private Rigidbody projectileRigidbody;
 
+    private Transform leftArm;
+
+    private Transform rightArm;
+
+    private LineRenderer slingshotBand;
+
+
     void Awake()
     {
         Transform launchPointTrans = transform.Find("LaunchPoint");
@@ -30,13 +43,38 @@ public class Slingshot : MonoBehaviour
         launchPoint.SetActive(false);
         launchPos = launchPointTrans.position;
 
+        leftArm = transform.Find("LeftArm");
+        rightArm = transform.Find("RightArm");
+
+        slingshotBand = GetComponent<LineRenderer>();
+        slingshotBand.material = bandMat;
+        slingshotBand.startWidth = slingshotBand.endWidth = bandWidth;
+        slingshotBand.numCapVertices = 4;
+        slingshotBand.useWorldSpace = true;
+        slingshotBand.positionCount = 3 ;
+
+        UpdateBand(launchPos);
+
+    }
+
+    Vector3 ArmTip(Transform arm)
+    {
+        return arm.position + arm.up * arm.lossyScale.y;
+    }
+
+    // Stretches the band from the left arm tip, through projPos, to the right arm
+
+    void UpdateBand(Vector3 projPos)
+    { 
+       slingshotBand.SetPosition(0, ArmTip(leftArm));
+       slingshotBand.SetPosition(1, projPos);
+       slingshotBand.SetPosition(2, ArmTip(rightArm));
+    
     }
 
     void Update()
     {
-        if (!aimingMode) {
-            return;
-        }
+        if (!aimingMode) { return; }
 
         Vector3 mousePos2D = Input.mousePosition;
         mousePos2D.z = -Camera.main.transform.position.z;
@@ -54,14 +92,18 @@ public class Slingshot : MonoBehaviour
 
         Vector3 projPos = launchPos + mouseDelta;
         projectile.transform.position = projPos;
+        UpdateBand(projPos);
 
         if (Input.GetMouseButtonUp(0))
         {
             aimingMode = false;
-            projectile.GetComponent<Rigidbody>().isKinematic = false;
-            projectileRigidbody.velocity = -mouseDelta * velocityMult;
+            Rigidbody projRB = projectile.GetComponent<Rigidbody>();
+            projRB.isKinematic = false;
+            projRB.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            projRB.velocity = -mouseDelta * velocityMult;
             FollowCam.POI = projectile;
             projectile = null;
+            UpdateBand(launchPos);
         }
 
     }

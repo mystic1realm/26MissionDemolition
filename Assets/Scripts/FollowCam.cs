@@ -34,7 +34,6 @@ public class FollowCam : MonoBehaviour
         destination.z = camZ;
 
         this.transform.position = destination;
-
-        Camera.main.orthographicSize = destination.y + 18;
+        
     }
 }

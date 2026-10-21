@@ -484,58 +484,58 @@ Halo:
     serializedVersion: 2
     rgba: 4290756543
   m_Size: 3
---- !u!1001 &7682931655383141060
+--- !u!1001 &4179463602847344342
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7682931653422565177, guid: 4058749b8fbaed541954e58e627225be, type: 3}
+    - target: {fileID: 4179463602009051396, guid: 4058749b8fbaed541954e58e627225be, type: 3}
       propertyPath: m_Name
       value: Castle
       objectReference: {fileID: 0}
-    - target: {fileID: 7682931653422565178, guid: 4058749b8fbaed541954e58e627225be, type: 3}
+    - target: {fileID: 4179463602009051397, guid: 4058749b8fbaed541954e58e627225be, type: 3}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 7682931653422565178, guid: 4058749b8fbaed541954e58e627225be, type: 3}
+    - target: {fileID: 4179463602009051397, guid: 4058749b8fbaed541954e58e627225be, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10
       objectReference: {fileID: 0}
-    - target: {fileID: 7682931653422565178, guid: 4058749b8fbaed541954e58e627225be, type: 3}
+    - target: {fileID: 4179463602009051397, guid: 4058749b8fbaed541954e58e627225be, type: 3}
       propertyPath: m_LocalPosition.y
       value: -9.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7682931653422565178, guid: 4058749b8fbaed541954e58e627225be, type: 3}
+    - target: {fileID: 4179463602009051397, guid: 4058749b8fbaed541954e58e627225be, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7682931653422565178, guid: 4058749b8fbaed541954e58e627225be, type: 3}
+    - target: {fileID: 4179463602009051397, guid: 4058749b8fbaed541954e58e627225be, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7682931653422565178, guid: 4058749b8fbaed541954e58e627225be, type: 3}
+    - target: {fileID: 4179463602009051397, guid: 4058749b8fbaed541954e58e627225be, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7682931653422565178, guid: 4058749b8fbaed541954e58e627225be, type: 3}
+    - target: {fileID: 4179463602009051397, guid: 4058749b8fbaed541954e58e627225be, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7682931653422565178, guid: 4058749b8fbaed541954e58e627225be, type: 3}
+    - target: {fileID: 4179463602009051397, guid: 4058749b8fbaed541954e58e627225be, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7682931653422565178, guid: 4058749b8fbaed541954e58e627225be, type: 3}
+    - target: {fileID: 4179463602009051397, guid: 4058749b8fbaed541954e58e627225be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7682931653422565178, guid: 4058749b8fbaed541954e58e627225be, type: 3}
+    - target: {fileID: 4179463602009051397, guid: 4058749b8fbaed541954e58e627225be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7682931653422565178, guid: 4058749b8fbaed541954e58e627225be, type: 3}
+    - target: {fileID: 4179463602009051397, guid: 4058749b8fbaed541954e58e627225be, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
@@ -617,6 +617,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabProjectile: {fileID: 6814573839567518612, guid: d7eb4b6cd0585664d81a8c49456d4323, type: 3}
   velocityMult: 8
+  bandWidth: 0.15
+  bandMat: {fileID: 2100000, guid: ea9bfa41af452684fa82802f15ce0a04, type: 2}
+  bandColor: {r: 0.35, g: 0.2, b: 0.1, a: 1}
   launchPoint: {fileID: 0}
   launchPos: {x: 0, y: 0, z: 0}
   projectile: {fileID: 0}
@@ -667,13 +670,13 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.025
     widthCurve:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0
-        value: 1
+        time: 0.00925827
+        value: 0.939394
         inSlope: 0
         outSlope: 0
         tangentMode: 0

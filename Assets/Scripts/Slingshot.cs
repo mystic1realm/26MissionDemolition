@@ -1,5 +1,3 @@
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Slingshot : MonoBehaviour
@@ -15,6 +13,12 @@ public class Slingshot : MonoBehaviour
     public Material bandMat;
 
     public Color bandColor = new Color(0.35f, 0.2f, 0.1f);
+
+    public AudioClip launchSound;
+    [Range(0f, 1f)]
+    public float launchVolume = 0.7f;
+
+    private AudioSource audioSource;
 
     [Header("Dynamic")]
 
@@ -37,6 +41,8 @@ public class Slingshot : MonoBehaviour
 
     void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
+
         Transform launchPointTrans = transform.Find("LaunchPoint");
 
         launchPoint = launchPointTrans.gameObject;
@@ -97,6 +103,12 @@ public class Slingshot : MonoBehaviour
         if (Input.GetMouseButtonUp(0))
         {
             aimingMode = false;
+
+            if (launchSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(launchSound, launchVolume);
+            }
+
             Rigidbody projRB = projectile.GetComponent<Rigidbody>();
             projRB.isKinematic = false;
             projRB.collisionDetectionMode = CollisionDetectionMode.Continuous;

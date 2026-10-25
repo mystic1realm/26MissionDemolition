@@ -4,10 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameOverUI : MonoBehaviour
 {
     public GameObject gameOverPanel;
-    public GameObject castle;
-    public float checkInterval = 2f;
 
-    private float nextCheckTime;
     private bool gameOver = false;
 
     void Start()
@@ -17,30 +14,38 @@ public class GameOverUI : MonoBehaviour
 
     void Update()
     {
-        // Temporary test: press G to show the Game Over screen
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            ShowGameOver();
-        }
-
-        if (gameOver || castle == null)
+        if (gameOver)
         {
             return;
         }
 
-        if (Time.time >= nextCheckTime)
+        // Press G to show the Game Over screen
+        if (Input.GetKeyDown(KeyCode.G))
         {
-            nextCheckTime = Time.time + checkInterval;
-            CheckCastle();
+            ShowGameOver();
+            return;
+        }
+
+        // Press N to advance to the next level
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            NextLevel();
         }
     }
 
-    void CheckCastle()
+    public void NextLevel()
     {
-        CastleBlock[] blocks =
-            castle.GetComponentsInChildren<CastleBlock>();
+        int currentLevel =
+            SceneManager.GetActiveScene().buildIndex;
 
-        if (blocks.Length == 0)
+        int totalLevels =
+            SceneManager.sceneCountInBuildSettings;
+
+        if (currentLevel < totalLevels - 1)
+        {
+            SceneManager.LoadScene(currentLevel + 1);
+        }
+        else
         {
             ShowGameOver();
         }
@@ -56,8 +61,6 @@ public class GameOverUI : MonoBehaviour
 
     public void RestartGame()
     {
-        SceneManager.LoadScene(
-            SceneManager.GetActiveScene().buildIndex
-        );
+        SceneManager.LoadScene("Level1");
     }
 }

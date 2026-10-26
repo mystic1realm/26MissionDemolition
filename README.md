@@ -17,6 +17,8 @@ Players can press G to display the game over screen. The screen includes a Play 
 4. Projectile Launch Sound
 A sound effect plays when a projectile is launhed, providing audio feedback during gameplay.
 
+- There are titles for the levels to indicate what level you're on.
+
 Controls:
 - Launch: Click and hold the projectile and drag the mouse to aim in the direction you want the projectile to go.
 - N: Advance to the next level.

@@ -4,12 +4,14 @@ using UnityEngine.SceneManagement;
 public class GameOverUI : MonoBehaviour
 {
     public GameObject gameOverPanel;
+    public TMPro.TextMeshProUGUI levelText;
 
     private bool gameOver = false;
 
     void Start()
     {
         gameOverPanel.SetActive(false);
+        UpdateLevelText();
     }
 
     void Update()
@@ -33,6 +35,17 @@ public class GameOverUI : MonoBehaviour
         }
     }
 
+    void UpdateLevelText()
+    {
+        int currentLevel = SceneManager
+            .GetActiveScene().buildIndex;
+
+        if (currentLevel >= 0 && currentLevel < 4)
+        {
+            levelText.text = "Level " + (currentLevel + 1);
+        }
+    }
+
     public void NextLevel()
     {
         int currentLevel =
@@ -41,7 +54,8 @@ public class GameOverUI : MonoBehaviour
         int totalLevels =
             SceneManager.sceneCountInBuildSettings;
 
-        if (currentLevel < totalLevels - 1)
+        if (currentLevel < totalLevels - 1 &&
+            currentLevel < 3)
         {
             SceneManager.LoadScene(currentLevel + 1);
         }

@@ -1,5 +1,4 @@
 # 26MissionDemolition
-IMPORTANT:
 To progess through the levels, you have to press the N key.
 
 
